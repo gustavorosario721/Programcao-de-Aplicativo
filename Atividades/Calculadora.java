@@ -52,6 +52,7 @@ public class Calculadora
                     else
                     {
                         System.out.println("0 elevado à 0 gera comportamento indefinido.");
+                        break;
                     }
                     System.out.printf("%d elevado à %d é %d\n\n", num1, num2, result);
                     break;
