@@ -7,6 +7,11 @@ public class Veiculo
         this.marca = marca;
     }
 
+    public String getMarca() 
+    {
+        return marca;
+    }
+
     public void ligar()
     {
         System.out.println();
