@@ -27,15 +27,6 @@ public class Usuario
       return cpf;
   }
 
-  public boolean cpfFormatoValido(cpf)
-  {
-    if (cpf.matches("\\d{3}\\.\\d{3}\\.\\d{3}\\-\\d{2}"))
-        return true;
-    else
-        return false;
-        
-  }
-
   public void exibirDados()
   {
     System.out.println("Nome: " + getNome());

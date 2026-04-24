@@ -1,7 +1,7 @@
 public class Emprestimo
 {
     private int id;
-    private String usuario;
+    private String cpf;
     private Livro livro;
     private int qtdEmprestado;
     private String dataEmprestimo;
@@ -18,14 +18,14 @@ public class Emprestimo
         return id;
     }
 
-    public void setUsuario(String usuario) 
+    public void setCpf(String cpf) 
     {
-        this.usuario = usuario;
+        this.cpf = cpf;
     }
 
-    public String getUsuario() 
+    public String getCpf()
     {
-        return usuario;
+        return cpf;
     }
 
     public void setLivro(Livro livro) 
