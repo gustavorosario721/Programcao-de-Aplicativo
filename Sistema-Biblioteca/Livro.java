@@ -24,7 +24,7 @@ public class Livro
 
     public Disciplina getDisciplina() 
     {
-        return disciplina.diminuirCaixa();
+        return disciplina;
     }
 
     public void setAutor(String autor) 

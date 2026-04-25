@@ -13,18 +13,13 @@ public class Professor extends Usuario
 
     public Disciplina getDisciplina() 
      {
-        return disciplina.diminuirCaixa();
+        return disciplina;
     }
 
-    public void cadastrarProfessor(Strimg nome, String cpf, Disciplina disciplina)
+    public void cadastrarProfessor(String nome, String cpf, Disciplina disciplina)
     {
         setNome(cpf);
-
-        if (cpfFormatoValido(cpf))
-            setCpf();
-        else
-            System.out.println("Formato de cpf invalido! Insira o no formato 000.000.000-00");
-    
+        setDisciplina(disciplina);
         setDisciplina(disciplina);
     }
 

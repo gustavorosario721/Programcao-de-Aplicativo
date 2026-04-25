@@ -6,7 +6,7 @@ public class Biblioteca
 {
     List <Usuario> usuarios = new ArrayList<>();
     List <Livro> livros = new ArrayList<>();
-    List <Emprestimo> emprestimos = new ArrayList();
+    List <Emprestimo> emprestimos = new ArrayList<>();
     Scanner input = new Scanner(System.in);
 
     public Biblioteca()
@@ -117,7 +117,7 @@ public class Biblioteca
             {
                 Professor p = new Professor();
                 p.cadastrarProfessor(nome, cpf, null);
-                usuarios.add(a);
+                usuarios.add(p);
             }
             else
                 System.out.println("Informe outro CPF e outra Matricula.");

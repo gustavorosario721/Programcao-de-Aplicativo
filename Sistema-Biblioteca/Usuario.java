@@ -30,6 +30,6 @@ public class Usuario
   public void exibirDados()
   {
     System.out.println("Nome: " + getNome());
-    System.out.println("Cpf: " getCpf());
+    System.out.println("Cpf: " + getCpf());
   }
 }

@@ -6,6 +6,7 @@ public class BibliotecaTeste
     {
         Scanner input = new Scanner(System.in);
         Biblioteca b1 = new Biblioteca();
+        byte op = 0;
 
         while (op != 9)
         {
