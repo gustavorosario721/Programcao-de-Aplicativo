@@ -8,7 +8,7 @@ public class BibliotecaTeste
         Biblioteca b1 = new Biblioteca();
         byte op = 0;
 
-        while (op != 9)
+        while (op != 0)
         {
             System.out.println("1 - Cadastrar Aluno");
             System.out.println("2 - Cadastrar Professor");
