@@ -1,12 +1,19 @@
 public class Emprestimo
 {
+    private static int contador = 1;
     private int id;
     private String cpf;
     private Livro livro;
     private int qtdEmprestado;
     private String dataEmprestimo;
-    private boolean jaFoiDevlvido = false;
+    private boolean ativo = true;
     private String dataDevolucao;
+
+
+    public Emprestimo()
+    {
+        this.id = contador++;
+    }
 
     public void setId(int id) 
     {
@@ -58,15 +65,15 @@ public class Emprestimo
         return dataEmprestimo;
     }
 
-    public void setJaFoiDevlvido(boolean jaFoiDevlvido) 
+    public void setAtivo(boolean ativo) 
     {
-        this.jaFoiDevlvido = jaFoiDevlvido;
+        this.ativo = ativo;
     }
 
-    public boolean getJaFoiDevlvido() 
+    public boolean getAtivo()
     {
-        return jaFoiDevlvido;
-    }    
+        return ativo;
+    }
 
     public void setDataDevolucao(String dataDevolucao)
     {
@@ -78,8 +85,9 @@ public class Emprestimo
         return dataDevolucao;
     }
 
-    public void pegarLivro(Livro livro, int qtdEmprestado, String dataEmprestimo)
+    public void pegarLivro(String cpf, Livro livro, int qtdEmprestado, String dataEmprestimo)
     {
+        setCpf(cpf);
         setLivro(livro);
         setQtdEmprestado(qtdEmprestado);
         setDataEmprestimo(dataEmprestimo);
@@ -89,7 +97,7 @@ public class Emprestimo
     public void devolverLivro(String dataDevolucao)
     {
         setDataDevolucao(dataDevolucao);
-        setJaFoiDevlvido(true);
+        setAtivo(false);
         livro.devolverLivro(qtdEmprestado);
     }
 }

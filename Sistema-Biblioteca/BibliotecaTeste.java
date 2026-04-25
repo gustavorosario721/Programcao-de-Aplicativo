@@ -47,9 +47,10 @@ public class BibliotecaTeste
                 case 8:
                     b1.listarEmprestimos();
                     break;
-                case 9:
+                case 0:
                     System.out.println("Encerrando o programa...");
                     System.out.println("bye");
+                    break;
                 default:
                     System.out.println("Opção inválida! Tente novamente");
                     break;

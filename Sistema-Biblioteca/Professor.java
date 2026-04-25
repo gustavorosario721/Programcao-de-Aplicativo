@@ -1,7 +1,7 @@
 public class Professor extends Usuario
 {
     private Disciplina disciplina;
-
+    public static final byte MAX_LIVROS = 5;
     public Professor()
     {
     }
@@ -21,6 +21,11 @@ public class Professor extends Usuario
         setNome(cpf);
         setDisciplina(disciplina);
         setDisciplina(disciplina);
+    }
+
+    public static byte getMaxLivros() 
+    {
+        return MAX_LIVROS;
     }
 
     @Override

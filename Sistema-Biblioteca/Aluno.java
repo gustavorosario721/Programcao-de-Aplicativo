@@ -1,7 +1,8 @@
 public class Aluno extends Usuario 
 {
     private String matricula;
-    
+    public static final byte MAX_LIVROS = 2;
+
     public Aluno()
     {
     }
@@ -21,6 +22,11 @@ public class Aluno extends Usuario
         setNome(nome);
         setCpf(cpf);
         setMatricula(matricula);
+    }
+
+    public static byte getMaxLivros() 
+    {
+        return MAX_LIVROS;
     }
 
     @Override

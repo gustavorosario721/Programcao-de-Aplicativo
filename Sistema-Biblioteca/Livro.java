@@ -7,6 +7,14 @@ public class Livro
     private int qtdLivre;
     private int qtdEmprestado;
 
+    public Livro(String titulo, String autor, int qtdTotal, Disciplina disciplina)
+    {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.qtdTotal = qtdTotal;
+        this.disciplina = disciplina;
+    }
+
     public void setTitulo(String titulo) 
     {
         this.titulo = titulo;
@@ -35,6 +43,13 @@ public class Livro
     public String getAutor() 
     {
         return autor;
+    }
+
+    public boolean temEstoque(int qtdEmprestado)
+    {
+        if (getQtdLivre() >= qtdEmprestado)
+            return true;
+        return false;
     }
 
     public void setQtdTotal(int qtdTotal) 
@@ -98,5 +113,14 @@ public class Livro
             totalLivre += qtdDevolvido;
             setQtdLivre(totalLivre);
         }
+    }
+
+    public void exibirDados()
+    {
+        System.out.println("Titulo: " + getTitulo());
+        System.out.println("Autor: " + getAutor());
+        System.out.println("Disciplina: " + getDisciplina().nomeFormatado());
+        System.out.println("Quantidade livre: " + getQtdLivre());
+        System.out.println("Quantidade emprestada: " + getQtdEmprestado());
     }
 }

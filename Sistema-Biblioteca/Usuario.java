@@ -2,6 +2,7 @@ public class Usuario
 {
   private String nome;
   private String cpf;
+  private byte qtdLivros;
 
   public Usuario()
   {
@@ -25,6 +26,16 @@ public class Usuario
   public String getCpf() 
   {
       return cpf;
+  }
+
+  public void setQtdLivros(byte qtdLivros) 
+  {
+      this.qtdLivros = qtdLivros;
+  }
+
+  public byte getQtdLivros() 
+  {
+      return qtdLivros;
   }
 
   public void exibirDados()
