@@ -10,6 +10,7 @@ public class BibliotecaTeste
 
         while (op != 0)
         {
+            System.out.println("---------- Menu Principal ----------");
             System.out.println("1 - Cadastrar Aluno");
             System.out.println("2 - Cadastrar Professor");
             System.out.println("3 - Cadastrar Livro");
@@ -19,7 +20,7 @@ public class BibliotecaTeste
             System.out.println("7 - Listar Livros");
             System.out.println("8 - Listar Emprestimos");
             System.out.println("0 - Sair");
-
+            System.out.print("Selecione uma opção: ");
             op = input.nextByte();
 
             switch (op) 

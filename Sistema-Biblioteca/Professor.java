@@ -18,8 +18,8 @@ public class Professor extends Usuario
 
     public void cadastrarProfessor(String nome, String cpf, Disciplina disciplina)
     {
-        setNome(cpf);
-        setDisciplina(disciplina);
+        setNome(nome);
+        setCpf(cpf);
         setDisciplina(disciplina);
     }
 
