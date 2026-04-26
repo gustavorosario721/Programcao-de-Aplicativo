@@ -38,9 +38,20 @@ public class Usuario
       return qtdLivros;
   }
 
+  public void pegarLivro(byte qtdEmprestado)
+  {
+    this.qtdLivros += qtdEmprestado;
+  }
+  
+  public void devolverLivro(byte qtdDevolvido)
+  {
+    this.qtdLivros -= qtdDevolvido;
+  }
+
   public void exibirDados()
   {
     System.out.println("Nome: " + getNome());
     System.out.println("Cpf: " + getCpf());
+    System.out.println("Livros em posse: " + getQtdLivros());
   }
 }

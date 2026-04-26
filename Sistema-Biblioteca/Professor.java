@@ -31,6 +31,6 @@ public class Professor extends Usuario
     @Override
     public void exibirDados() {
         super.exibirDados();
-        System.out.println("Disciplina: " + getDisciplina());
+        System.out.println("Disciplina: " + disciplina.nomeFormatado());
     }
 }

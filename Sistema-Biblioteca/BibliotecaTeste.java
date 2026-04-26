@@ -39,6 +39,7 @@ public class BibliotecaTeste
                     break;
                 case 5:
                     b1.devolverEmprestimo();
+                    break;
                 case 6:
                     b1.listarUsuarios();
                     break;

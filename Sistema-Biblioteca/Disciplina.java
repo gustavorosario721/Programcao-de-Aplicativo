@@ -15,7 +15,7 @@ public enum Disciplina
         Disciplina disciplinas[] = Disciplina.values();
         for (Disciplina d : disciplinas) 
         {
-            System.out.println((d.ordinal() + 1) + " - " + d.name().toLowerCase());
+            System.out.println((d.ordinal() + 1) + " - " + d.nomeFormatado());
         }
     }
 }

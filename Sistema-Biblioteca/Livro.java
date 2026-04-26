@@ -7,12 +7,8 @@ public class Livro
     private int qtdLivre;
     private int qtdEmprestado;
 
-    public Livro(String titulo, String autor, int qtdTotal, Disciplina disciplina)
+    public Livro()
     {
-        this.titulo = titulo;
-        this.autor = autor;
-        this.qtdTotal = qtdTotal;
-        this.disciplina = disciplina;
     }
 
     public void setTitulo(String titulo) 
@@ -82,9 +78,13 @@ public class Livro
         return qtdEmprestado;
     }
 
-    public void cadastrarLivro(String titulo, Disciplina disciplina, String autor, int qtdTotal)
+    public void cadastrarLivro(String titulo, String autor, Disciplina disciplina, int qtdTotal)
     {
-
+        setTitulo(titulo);
+        setAutor(autor);
+        setDisciplina(disciplina);
+        setQtdTotal(qtdTotal);
+        setQtdLivre(qtdTotal);
     }
 
     public void emprestarLivro(int qtdEmprestado)
