@@ -41,6 +41,19 @@ public class Biblioteca
 
         return d;
     }
+
+    public void recomendarLivro(Professor professor)
+    {
+        System.out.println("---------- Livros Recomendados ----------");
+        for (Livro l : livros) 
+        {
+            if (l.getDisciplina().equals(professor.getDisciplina()))
+            {
+                l.exibirDados();
+                System.out.println("----------------------------------------");
+            }
+        }
+    }
  
     public void cadastrarAluno()
     {
@@ -185,6 +198,11 @@ public class Biblioteca
 
     public void realizarEmprestimo() 
     {
+        if (usuarios.isEmpty())
+            System.out.println("\n\t\t!Sem usuario cadastrado!");
+        else if (livros.isEmpty())
+            System.out.println("\n\t\t!Sem livro cadastrado!");
+
         System.out.println("---------- Realizar Emprestimo ----------");
         System.out.print("Informe o CPF do usuário: ");
         String cpf = input.nextLine();
@@ -195,6 +213,14 @@ public class Biblioteca
             System.out.println("----------------------------------------");
             return;
         }
+
+        if (usuario instanceof Professor) 
+        {
+            Professor p = (Professor) usuario;
+            recomendarLivro(p);
+        }
+
+        listarLivros();
 
         System.out.print("Informe o título do livro: ");
         String titulo = input.nextLine();
