@@ -239,6 +239,12 @@ public class Biblioteca
         System.out.print("Informe a quantidade desejada de livro: ");
         byte qtdEmprestado = input.nextByte();
         input.nextLine();
+
+        if (qtdEmprestado <= 0)
+        {
+            System.out.println("\n\t\t!Quantidade nula ou negativa não permitida!");
+            return;
+        }        
         
         if ((usuario instanceof Aluno) &&
             ((qtdEmprestado + usuario.getQtdLivros()) 
