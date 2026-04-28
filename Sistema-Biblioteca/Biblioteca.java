@@ -2,6 +2,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoUnit;
 
 
@@ -70,7 +71,7 @@ public class Biblioteca
  
     public void cadastrarAluno()
     {
-        boolean cpfValido;
+        boolean cpfValido = true;
         boolean matriculaValida;
         String nome;
         String cpf;
@@ -118,6 +119,7 @@ public class Biblioteca
         else
         {
             System.out.println("\n\t\t!Informe outro CPF e outra Matricula!\n");
+            return;
         }
 
         System.out.println("\n\t\tAluno cadastrado com sucesso!\n");
@@ -313,9 +315,8 @@ public class Biblioteca
         }
 
         dias = Byte.parseByte(diasTxt);
-        LocalDate devolucao = hoje.plusDays(dias);
 
-        novoEmprestimo.pegarLivro(usuario, livroAlvo, qtdEmprestado, hoje, devolucao);
+        novoEmprestimo.pegarLivro(usuario, livroAlvo, qtdEmprestado, hoje, dias);
         emprestimos.add(novoEmprestimo);
         usuario.pegarLivro(qtdEmprestado);
         System.out.printf("Empréstimo realizado com sucesso para: %s\n", usuario.getNome());
@@ -338,11 +339,26 @@ public class Biblioteca
 
         id = Integer.parseInt(idTxt);
 
-        Emprestimo e = Buscador.buscaEmprestimo(id, emprestimos);
+        Emprestimo emprestimo = Buscador.buscaEmprestimo(id, emprestimos);
 
-        if (e != null && e.getAtivo()) 
+        if (emprestimo != null && emprestimo.getAtivo()) 
         {
-            e.devolverLivro("00/00/0000");
+            System.out.print("Informe a data da devolução: ");
+            String dataTxt = input.nextLine();
+            LocalDate data;
+
+            try 
+            {
+                data = LocalDate.parse(dataTxt);
+            } 
+            catch (DateTimeParseException e)
+            {
+                System.out.println("\n\t\t!Data invalida!");
+                System.out.println("----------------------------------------");
+                return;
+            }
+
+            emprestimo.devolverLivro(data);
             System.out.println("Emprestimo devolvido com sucesso!\n");
         }
         else
@@ -406,6 +422,9 @@ public class Biblioteca
                 System.out.println("Quantidade: " + e.getQtdEmprestado());
                 System.out.println("Usuário: " + u.getNome());
                 System.out.println("Status: " + status);
+                System.out.println("Data do emprestimo: " + e.getDataEmprestimo());
+                System.out.println("Data devolução/prevista: " + e.getDataDevolucao());
+                System.out.println("Multa: " + e.getMulta());
                 System.out.println("----------------------------------------");
             }
         }

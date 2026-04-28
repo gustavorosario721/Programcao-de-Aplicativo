@@ -11,7 +11,7 @@ public class Emprestimo
     private LocalDate dataEmprestimo;
     private boolean ativo = true;
     private LocalDate dataDevolucao;
-    private double multa;
+    private double multa = 0;
 
 
     public Emprestimo()
@@ -99,26 +99,35 @@ public class Emprestimo
         return multa;
     }
 
-    public void pegarLivro(Usuario usuario, Livro livro, byte qtdEmprestado, LocalDate dataEmprestimo, LocalDate dataDevolucao)
+    public void pegarLivro(Usuario usuario, Livro livro, byte qtdEmprestado, LocalDate dataEmprestimo, byte dataDevolucao)
     {
+        this.dataDevolucao = dataEmprestimo.plusDays(dataDevolucao);
         setUsuario(usuario);
         setLivro(livro);
         setQtdEmprestado(qtdEmprestado);
         setDataEmprestimo(dataEmprestimo);
-        setDataDevolucao(dataDevolucao);
         livro.emprestarLivro(qtdEmprestado);
     }
 
-    public void calcularMulta()
+    public void calcularMulta(long dias)
     {
-
+        double multa = 2.50;
+        multa *= dias;
+        System.out.println("\n\t\t!Emprestimo em atraso multa de: " + multa);
+        System.out.println("----------------------------------------");
+        setMulta(multa);
     }
 
     public void devolverLivro(LocalDate dataDevolucao)
     {
+        long dias = ChronoUnit.DAYS.between(this.dataDevolucao, dataDevolucao);
+        System.out.println(dias);
         setDataDevolucao(dataDevolucao);
         setAtivo(false);
         livro.devolverLivro(qtdEmprestado);
         usuario.devolverLivro(qtdEmprestado);
+
+        if (dias > 0)
+            calcularMulta(dias);
     }
 }
