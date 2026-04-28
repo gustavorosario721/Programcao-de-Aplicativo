@@ -7,6 +7,7 @@ public class BibliotecaTeste
         Scanner input = new Scanner(System.in);
         Biblioteca b1 = new Biblioteca();
         byte op = 1;
+        String opTxt;
 
         while (op != 0)
         {
@@ -21,8 +22,13 @@ public class BibliotecaTeste
             System.out.println("8 - Listar Emprestimos");
             System.out.println("0 - Sair");
             System.out.print("Selecione uma opção: ");
-            op = input.nextByte();
+            opTxt = input.nextLine();
 
+            if (opTxt.matches("-?\\d+"))
+                op = Byte.parseByte(opTxt);
+            else
+                op = -1;
+            
             switch (op) 
             {
                 case 1:

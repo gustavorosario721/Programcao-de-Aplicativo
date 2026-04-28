@@ -17,8 +17,12 @@ public class Biblioteca
     {
         Disciplina d;
         Disciplina.listarDisciplinas();
-        byte op = input.nextByte();
-        input.nextLine();
+        String opTxt = input.nextLine();
+
+        if (!opTxt.matches("-?\\d+"))
+            opTxt = "-1";
+
+        byte op = Byte.parseByte(opTxt);
         switch (op) 
         {
             case 1:
@@ -69,7 +73,7 @@ public class Biblioteca
 
         do
         {
-            System.out.print("Informe o CPF no formato 000.000.000-00: ");
+            System.out.print("Informe o CPF no formato 000000000-00: ");
             cpf = input.nextLine();
             cpfValido = Validador.cpfFormatoValido(cpf);
             if (!cpfValido)
@@ -124,7 +128,7 @@ public class Biblioteca
 
         do
         {
-            System.out.print("Informe o CPF do professor no formato 000.000.000-00: ");
+            System.out.print("Informe o CPF do professor no formato 000000000-00: ");
             cpf = input.nextLine();
             cpfValido = Validador.cpfFormatoValido(cpf);
             if (!cpfValido)
@@ -163,6 +167,8 @@ public class Biblioteca
     public void cadastrarLivro() {
         Disciplina d;
         int qtdTotal;
+        String qtdTotalTxt;
+        boolean numeroValido = true;
 
         System.out.println("---------- Cadastro de Livro ----------");
         System.out.print("Informe o título do livro: ");
@@ -173,14 +179,21 @@ public class Biblioteca
         do 
         {
             System.out.println("Informe a quantidade total de livro");
-            qtdTotal = input.nextInt();
-            input.nextLine();
+            qtdTotalTxt = input.nextLine();
 
-            if (qtdTotal <= 0)
-                System.out.println("\n\t\t!Informe uma quantidade não nula e positiva!\n");
+            if (!qtdTotalTxt.matches("\\d+"))
+            {
+                System.out.println("\n\t\t!Caracter invalido ou numero negativo!");
+                numeroValido = false;
+                qtdTotalTxt = "-1";
+            }
+            else
+                numeroValido = true;
         } 
-        while (qtdTotal <= 0);
+        while (!numeroValido);
         
+        qtdTotal = Integer.parseInt(qtdTotalTxt);
+
         do
         {   
             System.out.println("---------- Disciplinas ----------");
@@ -199,9 +212,15 @@ public class Biblioteca
     public void realizarEmprestimo() 
     {
         if (usuarios.isEmpty())
+        {
             System.out.println("\n\t\t!Sem usuario cadastrado!");
+            return;
+        }
         else if (livros.isEmpty())
+        {
             System.out.println("\n\t\t!Sem livro cadastrado!");
+            return;
+        }
 
         System.out.println("---------- Realizar Emprestimo ----------");
         System.out.print("Informe o CPF do usuário: ");
@@ -225,6 +244,7 @@ public class Biblioteca
         System.out.print("Informe o título do livro: ");
         String titulo = input.nextLine();
         Livro livroAlvo = Buscador.buscarLivro(titulo, livros);
+        byte qtdEmprestado;
 
         if (livroAlvo == null)
         {
@@ -237,15 +257,16 @@ public class Biblioteca
         System.out.printf("Quantidade maxima de livros para\nProfessor: %d\nAluno: %d\n", Professor.getMaxLivros(), Aluno.getMaxLivros());
         System.out.println("Quantidade de livros em posse do usuario: " + usuario.getQtdLivros());
         System.out.print("Informe a quantidade desejada de livro: ");
-        byte qtdEmprestado = input.nextByte();
-        input.nextLine();
+        String qtdEmprestadoTxt = input.nextLine();
 
-        if (qtdEmprestado <= 0)
+        if (!qtdEmprestadoTxt.matches("\\d+"))
         {
-            System.out.println("\n\t\t!Quantidade nula ou negativa não permitida!");
+            System.out.println("\n\t\t!Caracter invalido ou numero negativo. Abortando");
             return;
-        }        
-        
+        }
+
+        qtdEmprestado = Byte.parseByte(qtdEmprestadoTxt);
+
         if ((usuario instanceof Aluno) &&
             ((qtdEmprestado + usuario.getQtdLivros()) 
                 > Aluno.getMaxLivros()))
@@ -277,10 +298,20 @@ public class Biblioteca
 
     public void devolverEmprestimo() 
     {
+        int id;
+
         System.out.println("---------- Devolver Emprestimo ----------");
         System.out.print("Informe o id do emprestimo a ser devolvido: ");
-        int id = input.nextInt();
-        input.nextLine();
+        String idTxt = input.nextLine();
+
+        if (!idTxt.matches("\\d+")) 
+        {
+            System.out.println("\n\t\t!Caracter invalido ou numero negativo. Abortando");
+            return;
+        }
+
+        id = Integer.parseInt(idTxt);
+
         Emprestimo e = Buscador.buscaEmprestimo(id, emprestimos);
 
         if (e != null && e.getAtivo()) 
