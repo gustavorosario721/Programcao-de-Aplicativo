@@ -1,6 +1,9 @@
 import java.util.List;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 
 public class Biblioteca
 {
@@ -18,11 +21,17 @@ public class Biblioteca
         Disciplina d;
         Disciplina.listarDisciplinas();
         String opTxt = input.nextLine();
+        byte op;
 
-        if (!opTxt.matches("-?\\d+"))
-            opTxt = "-1";
+        try 
+        {
+            op = Byte.parseByte(opTxt);
+        } 
+        catch (NumberFormatException e) 
+        {
+            op = -1;
+        }
 
-        byte op = Byte.parseByte(opTxt);
         switch (op) 
         {
             case 1:
@@ -283,17 +292,34 @@ public class Biblioteca
             return;   
         }
 
-        if (livroAlvo.temEstoque(qtdEmprestado)) 
+        if (!livroAlvo.temEstoque(qtdEmprestado)) 
         {
-            Emprestimo novoEmprestimo = new Emprestimo();
-            novoEmprestimo.pegarLivro(usuario, livroAlvo, qtdEmprestado, titulo);
-            emprestimos.add(novoEmprestimo);
-            usuario.pegarLivro(qtdEmprestado);
-            System.out.printf("Empréstimo realizado com sucesso para: %s\n", usuario.getNome());
-        } 
-        else
             System.out.println("\n\t\t!Quantidade exedeu estoque!\n");
-        System.out.println("----------------------------------------");
+            System.out.println("----------------------------------------");
+            return;
+        }
+
+        Emprestimo novoEmprestimo = new Emprestimo();
+        LocalDate hoje = LocalDate.now();
+        byte dias;
+
+        System.out.print("Informe quantos dias o usario tem para devolver o livro: ");
+        String diasTxt = input.nextLine();
+
+        if (!diasTxt.matches("\\d+"))
+        {
+        System.out.println("\n\t\t!Caracter invalido ou numero negativo. Abortando");
+        return;
+        }
+
+        dias = Byte.parseByte(diasTxt);
+        LocalDate devolucao = hoje.plusDays(dias);
+
+        novoEmprestimo.pegarLivro(usuario, livroAlvo, qtdEmprestado, hoje, devolucao);
+        emprestimos.add(novoEmprestimo);
+        usuario.pegarLivro(qtdEmprestado);
+        System.out.printf("Empréstimo realizado com sucesso para: %s\n", usuario.getNome());
+
     }
 
     public void devolverEmprestimo() 

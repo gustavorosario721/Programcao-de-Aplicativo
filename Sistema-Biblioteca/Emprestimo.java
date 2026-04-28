@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+
 public class Emprestimo
 {
     private static int contador = 1;
@@ -5,9 +8,10 @@ public class Emprestimo
     private Usuario usuario;
     private Livro livro;
     private byte qtdEmprestado;
-    private String dataEmprestimo;
+    private LocalDate dataEmprestimo;
     private boolean ativo = true;
-    private String dataDevolucao;
+    private LocalDate dataDevolucao;
+    private double multa;
 
 
     public Emprestimo()
@@ -55,12 +59,12 @@ public class Emprestimo
         return qtdEmprestado;
     }
 
-    public void setDataEmprestimo(String dataEmprestimo)
+    public void setDataEmprestimo(LocalDate dataEmprestimo) 
     {
         this.dataEmprestimo = dataEmprestimo;
     }
 
-    public String getDataEmprestimo() 
+    public LocalDate getDataEmprestimo() 
     {
         return dataEmprestimo;
     }
@@ -75,26 +79,42 @@ public class Emprestimo
         return ativo;
     }
 
-    public void setDataDevolucao(String dataDevolucao)
+    public void setDataDevolucao(LocalDate dataDevolucao) 
     {
         this.dataDevolucao = dataDevolucao;
     }
 
-    public String getDataDevolucao()
+    public LocalDate getDataDevolucao() 
     {
         return dataDevolucao;
     }
 
-    public void pegarLivro(Usuario usuario, Livro livro, byte qtdEmprestado, String dataEmprestimo)
+    public void setMulta(double multa) 
+    {
+        this.multa = multa;
+    }
+
+    public double getMulta() 
+    {
+        return multa;
+    }
+
+    public void pegarLivro(Usuario usuario, Livro livro, byte qtdEmprestado, LocalDate dataEmprestimo, LocalDate dataDevolucao)
     {
         setUsuario(usuario);
         setLivro(livro);
         setQtdEmprestado(qtdEmprestado);
         setDataEmprestimo(dataEmprestimo);
+        setDataDevolucao(dataDevolucao);
         livro.emprestarLivro(qtdEmprestado);
     }
 
-    public void devolverLivro(String dataDevolucao)
+    public void calcularMulta()
+    {
+
+    }
+
+    public void devolverLivro(LocalDate dataDevolucao)
     {
         setDataDevolucao(dataDevolucao);
         setAtivo(false);
